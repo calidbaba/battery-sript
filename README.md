@@ -6,3 +6,7 @@
 ```bash
 exec /home/baba/bin/battery.sh &
 ```
+
+#### dependencies
+    paplay
+    zenity
