@@ -1,13 +1,17 @@
 #!/bin/bash
 on=1
+bt_perc=20
+bt_path=$( upower -e | grep battery)
+test -z "$bt_path" && echo "Fant ikke batteri" && exit
+
 while true; do
-    bat=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | cut -d":" -f2)
+    bat=$(upower -i "$bt_path" | grep percentage | cut -d":" -f2)
     bat=${bat::-1}
-    if [ 20 -gt $bat ] && [ $on -gt 0 ];then
+    if [ $bt_perc -gt $bat ] && [ $on -gt 0 ];then
         paplay "test.wav"
         zenity --error --text="Battery low" 
         on=0
-    elif [ $bat -gt 20 ];then 
+    elif [ $bat -gt $bt_perc ];then
         on=1
     fi
     sleep 120
