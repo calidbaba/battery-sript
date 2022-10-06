@@ -9,4 +9,4 @@ exec <path to battery.sh> &
 
 #### dependencies
     paplay
-    zenity
+    dunstify
